@@ -7,6 +7,7 @@ var app = express();
 var exphbs = require('express-handlebars');
 var firebase = require('firebase');
 var orm = require(__dirname+'/config/orm.js');
+var mysql = require('mysql');
 // require('firebase/auth');
 // require('firebase/database');
 
@@ -18,10 +19,28 @@ var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var LocalStrategy = require('passport-local').Strategy;
 
+
+// Sets up the Heroku Jaws DB
+// =============================================================
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows[0].solution);
+});
+
+
+
+
+
+
 // Sets up the Express App
 // =============================================================
 
-var PORT = 4000;
+var PORT = process.env.PORT || 4000;
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
@@ -266,3 +285,5 @@ app.post('/checkout-step-3', function (req, res) {
 app.listen(PORT, function () {
 	console.log('App listening on PORT ' + PORT);
 });
+
+connection.end();
