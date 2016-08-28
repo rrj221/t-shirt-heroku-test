@@ -17,7 +17,7 @@ module.exports = {
 			callback(toHandlebars);
 		})
 	},
-	addUser: function (userData) {
+	addUser: function (userData, callback) {
 		user.create({
 			username: userData.userName,
 			password: userData.password,
@@ -27,6 +27,7 @@ module.exports = {
 			DOB: userData.DOB
 		}).then(function (results) {
 			console.log(results);
+			callback();
 		});
 	},
 	addOrder: function (userid, orderData, callback) {

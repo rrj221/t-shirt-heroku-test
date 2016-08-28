@@ -213,7 +213,10 @@ app.get('/new-user', function (req, res) {
 app.post('/create-user', function (req, res) {
 	console.log(req.body);
 	console.log('create the new user please');
-	orm.addUser(req.body);
+	orm.addUser(req.body, function () {
+		console.log('i am going to redirect now if that\'s ok with you');
+		res.redirect('/upload');
+	});
 });
 
 app.get('/order-history', function (req, res) {
