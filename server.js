@@ -22,15 +22,15 @@ var LocalStrategy = require('passport-local').Strategy;
 
 // Sets up the Heroku Jaws DB
 // =============================================================
-var connection = mysql.createConnection(process.env.JAWSDB_URL);
+// var connection = mysql.createConnection(process.env.JAWSDB_URL);
 
-connection.connect();
+// connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
+// connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+//   if (err) throw err;
 
-  console.log('The solution is: ', rows[0].solution);
-});
+//   console.log('The solution is: ', rows[0].solution);
+// });
 
 
 
@@ -40,7 +40,7 @@ connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
 // Sets up the Express App
 // =============================================================
 
-var PORT = process.env.PORT || 4000;
+var PORT = 4000;
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
@@ -286,4 +286,4 @@ app.listen(PORT, function () {
 	console.log('App listening on PORT ' + PORT);
 });
 
-connection.end();
+// connection.end();
