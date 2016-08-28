@@ -47,17 +47,19 @@ app.set('view engine', 'handlebars');
 
 console.log(process.env);
 console.log(process.env.JAWSDB_URL);
+
+process.env.JAWSDB_URL = 'mysql://lrqnduqriyrxfj9n:exh5jamgtmqovgs9@d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/mtfw5ey7yj1db4ov';
 // Sets up the Heroku Jaws DB
 // =============================================================
-// var connection = mysql.createConnection(process.env.JAWSDB_URL);
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
 
-// connection.connect();
+connection.connect();
 
-// connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-//   if (err) throw err;
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+  if (err) throw err;
 
-//   console.log('The solution is: ', rows[0].solution);
-// });
+  console.log('The solution is: ', rows[0].solution);
+});
 
 
 //// PASSPORT ////////////////////
