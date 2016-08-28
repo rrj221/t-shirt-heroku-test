@@ -1,0 +1,176 @@
+    <!-- PLUGINS CSS STYLE -->
+    <link href="static/plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
+    {{!-- <link href="static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/plugins/selectbox/select_option1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/plugins/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/plugins/owl-carousel/owl.carousel.css" media="screen">
+
+    <!-- GOOGLE FONT -->
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    
+    <!-- CUSTOM CSS -->
+    {{!-- <link href="static/css/checkout-style.css" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="static/css/colors/default.css" id="option_color">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="static/css/business-casual.css" rel="stylesheet">
+
+    {{!-- my css --}}
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+
+{{orderInfo.imgURL}}
+{{orderInfo.color}}
+{{orderInfo.shirtId}}
+
+
+    <div class="main-wrapper">
+      
+      <!-- MAIN CONTENT SECTION -->
+      <section class="mainContent clearfix stepsWrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="innerWrapper clearfix stepsPage">
+                <div class="row progress-wizard" style="border-bottom:0;">
+
+                  <div class="col-xs-4 progress-wizard-step complete fullBar">
+                    <div class="text-center progress-wizard-stepnum">Billing &amp; Shipping Address</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+
+                  <div class="col-xs-4 progress-wizard-step complete fullBar">
+                    <div class="text-center progress-wizard-stepnum">Payment Method</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+
+                  <div class="col-xs-4 progress-wizard-step complete">
+                    <div class="text-center progress-wizard-stepnum">Review</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+                </div>
+                
+                <form action="/upload" class="row" method="POST" role="form">
+                  <input type='hidden' name='imgURL' value={{orderInfo.imgURL}}>
+                  <input type='hidden' name='color' value={{orderInfo.color}}>
+                  <input type='hidden' name='shirtId' value={{orderInfo.shirtId}}>
+                  <div class="col-xs-12">
+                    <div class="page-header">
+                      <h4>order review</h4>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">Billing Address</h4>
+                      </div>
+                      <div class="panel-body">
+                        <address>
+                          <strong>{{billingShipping.billingFirstName}} {{billingShipping.billingLastName}}</strong><br>
+                          {{billingShipping.billingAddress}}<br>
+                          {{billingShipping.shippingCity}}<br>
+                          {{billingShipping.billingState}}, {{billingShipping.billingZipCode}}<br>
+                          {{billingShipping.billingCountry}}
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">Shipping Address</h4>
+                      </div>
+                      <div class="panel-body">
+                        <address>
+                          <strong>{{billingShipping.shippingFirstName}} {{billingShipping.shippingLastName}}</strong><br>
+                          {{billingShipping.shippingAddress}} <br>
+                          {{billingShipping.shippingCity}} <br>
+                          {{billingShipping.shippingState}}, {{billingShipping.shippingZipCode}}<br>
+                          {{billingShipping.shippingCountry}}
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">Payment Method</h4>
+                      </div>
+                      <div class="panel-body">
+                        <address>
+                          <span>{{cardInfo.paymentType}} - {{cardInfo.cardType}}</span>
+                        </address>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-xs-12">
+{{!--                     <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">Shipping Method</h4>
+                      </div>
+                      <div class="panel-body">
+                        <address>
+                          <span>Post Air Mail</span>
+                        </address>
+                      </div> --}}
+                    </div>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">Order Details</h4>
+                      </div>
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-sm-4 col-xs-12">
+                            <address>
+                              <a href="#">Email: {{billingShipping.billingEmail}}</a> <br>
+                              <span>Phone: {{billingShipping.billingPhone}}</span>
+                            </address>
+                          </div>
+                          <div class="col-sm-8 col-xs-12">
+                            <address>
+                              <span>Additional Information: </span><br>
+                              <p>Click to confirm your order of a {{orderInfo.color}} shirt with this image</p>
+                              <img src={{orderInfo.imgURL}} height="64" width='64'>
+                            </address>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12">
+                    <div class="well well-lg clearfix">
+                      <ul class="pager">
+                      {{!-- <li class="previous"><a href="/checkout-step-3">Back</a></li> --}}
+                        <button class="btn btn-success next">Confirm</button>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="static/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="static/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="static/plugins/owl-carousel/owl.carousel.js"></script>
+    <script src="static/plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+    <script src="static/plugins/countdown/jquery.syotimer.js"></script>
+
+    <script src="static/javascript/checkout.js"></script>
+

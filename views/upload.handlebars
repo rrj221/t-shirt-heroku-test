@@ -1,0 +1,32 @@
+<h1>CREATE A SHIRT</h1>
+
+<h4>You are now logged in, {{name}}!</h4>
+
+<h4>Would you like to create a TShirt?</h4>
+
+<form action='/checkout-step-1' method='POST' class='form shirt-form'>
+{{!-- <form class='form'> --}}
+	<input type='hidden' class='imgURL' name='imgURL'>
+	<input type='hidden' class='color' name='color'>
+	<input type='hidden' class='shirtId' name='shirtId'>
+	<div class="form-group color">
+    	<label for="exampleSelect1">Choose your color</label>
+	    <select class="form-control" id="colorSelect">
+	        {{#each shirts}}
+	        	<option data-color={{this.dataValues.color}}
+	        			data-price={{this.dataValues.price}}
+	        			data-id={{this.dataValues.id}}>
+	        			{{this.dataValues.color}}   ${{this.dataValues.price}}.00
+	        	</option>
+	        {{/each}}
+        </select>
+  	</div>
+  	<input type="file" id="input">
+    <button type="submit" class="btn btn-success order">Order</button>
+</form>
+
+
+
+
+
+<div id='image'></div>

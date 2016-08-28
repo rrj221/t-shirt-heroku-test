@@ -1,0 +1,164 @@
+    <!-- PLUGINS CSS STYLE -->
+    <link href="static/plugins/jquery-ui/jquery-ui.css" rel="stylesheet">
+    {{!-- <link href="static/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="static/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="static/plugins/selectbox/select_option1.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/plugins/rs-plugin/css/settings.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="static/plugins/owl-carousel/owl.carousel.css" media="screen">
+
+    <!-- GOOGLE FONT -->
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+    
+    <!-- CUSTOM CSS -->
+    {{!-- <link href="static/css/checkout-style.css" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="static/css/colors/default.css" id="option_color">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="static/css/business-casual.css" rel="stylesheet">
+
+    {{!-- my css --}}
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+    <div class='shippingDataDiv hide'>{{shippingData}}</div>
+
+    <div class="main-wrapper">
+
+
+      
+      <!-- MAIN CONTENT SECTION -->
+      <section class="mainContent clearfix stepsWrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="innerWrapper clearfix stepsPage">
+                <div class="row progress-wizard" style="border-bottom:0;">
+
+                  <div class="col-xs-4 progress-wizard-step complete fullBar">
+                    <div class="text-center progress-wizard-stepnum">Billing &amp; Shipping Address</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    {{!-- <a href="/checkout-step-1" class="progress-wizard-dot"></a> --}}
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+
+                  <div class="col-xs-4 progress-wizard-step active">
+                    <div class="text-center progress-wizard-stepnum">Payment Method</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    {{!-- <a href="/checkout-step-3" class="progress-wizard-dot"></a> --}}
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+
+                  <div class="col-xs-4 progress-wizard-step disabled">
+                    <div class="text-center progress-wizard-stepnum">Review</div>
+                    <div class="progress"><div class="progress-bar"></div></div>
+                    {{!-- <a href="/checkout-step-4" class="progress-wizard-dot"></a> --}}
+                    <span class="progress-wizard-dot"></span>
+                  </div>
+                </div>
+                
+                <form action="/checkout-step-3" class="row" method="POST">
+                  <div class="col-xs-12">
+                    <div class="page-header">
+                      <h4>Payment Information</h4>
+                    </div>
+                  </div>
+                  <input type='hidden' class='billingShipping' name='billingShipping' {{!-- value={{shippingData}} --}}>
+                  <div class="form-group col-sm-4 col-xs-12">
+                    <label for="">Payment By</label>
+                    <span class="step-drop">
+                      <select name="paymentType" id="guiest_id3" class="select-drop">
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>          
+                      </select>
+                    </span>
+                  </div>
+                  <div class="form-group col-sm-4 col-xs-12">
+                    <label for="">Card type</label>
+                    <span class="step-drop">
+                      <select name="cardType" id="guiest_id3" class="select-drop">
+                        <option value="Visa">Visa</option>
+                        <option value="MasterCard">MasterCard</option>
+                        <option value="American Express">American Express</option>          
+                      </select>
+                    </span>
+                  </div>
+                  <div class="form-group col-sm-4 col-xs-12">
+                    <label for="">Card Number</label>
+                    <input type="text" class="form-control" id="">
+                  </div>
+                  <div class="form-group col-sm-4 col-xs-12">
+                    <label for="">Expiration Date</label>
+                    <div class="row">
+                      <div class="col-xs-6">
+                        <span class="step-drop">
+                          <select name="expMonth" id="guiest_id3" class="select-drop">
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>            
+                          </select>
+                        </span>
+                      </div>
+                      <div class="col-xs-6">
+                        <span class="step-drop">
+                          <select name="expYear" id="guiest_id3" class="select-drop">
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2010">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                            <option value="2026">2026</option>            
+                          </select>
+                        </span>
+                      </div>
+                    </div> 
+                  </div>
+                  <div class="form-group col-sm-4 col-xs-12">
+                    <label for="">CV Code</label>
+                    <input name='cvCode' type="text" class="form-control" id="">
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="well well-lg clearfix">
+                      <ul class="pager">
+                      {{!-- <li class="previous"><a href="/checkout-step-1">back</a></li> --}}
+                        <button class="next3 btn btn-primary">Continue</button>
+                      </ul>
+                    </div>
+                  </div>
+                </form>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="static/plugins/jquery-ui/jquery-ui.js"></script>
+    <script src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="static/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="static/plugins/owl-carousel/owl.carousel.js"></script>
+    <script src="static/plugins/selectbox/jquery.selectbox-0.1.3.min.js"></script>
+    <script src="static/plugins/countdown/jquery.syotimer.js"></script>
+
+    <script src="static/javascript/checkout.js"></script>
+    <script src="static/javascript/my-checkout.js"></script>
