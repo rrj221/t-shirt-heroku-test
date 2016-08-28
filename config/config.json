@@ -14,10 +14,17 @@
     "dialect": "mysql"
   },
   "production": {
+<<<<<<< HEAD
     "username": "root",
     "password": "hagrid",
     "database": "database_production",
     "host": "127.0.0.1",
+=======
+    "username": "lrqnduqriyrxfj9n",
+    "password": "exh5jamgtmqovgs9",
+    "database": "mtfw5ey7yj1db4ov",
+    "host": "d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+>>>>>>> fb716ed73dae779a2c8aece429bb8c58ce93c2a0
     "dialect": "mysql"
   }
 }
