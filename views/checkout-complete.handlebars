@@ -31,20 +31,24 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="thanksContent">
-                <h2>Thank You For Your Order <small>You will receive an email of your order details</small></h2>
+                <h2>Thank You For Your Order, <small style='color:white'>You will receive an email of your order details</small></h2>
                 <h3>Shipping Details</h3>
                 <div class="thanksInner">
                   <div class="row">
-                    <div class="col-sm-6 col-xs-12 tableBlcok">
+                    <div class="col-sm-6 col-xs-12 tableBlcok well" style='color:black'>
                       <address>
-                        <span>Shipping address:</span> <a href="mailto:adamsmith@bigbag.com">adamsmith@bigbag.com</a> <br>
-                        <span>Email:</span> <a href="mailto:adamsmith@bigbag.com">adamsmith@bigbag.com</a> <br>
-                        <span>Phone:</span> +884 5452 6432
+                        <span>Shipping address:</span> 
+                          <div>{{formData.shippingAddress}}</div> 
+                          <div>{{formData.shippingCity}}, {{formData.shippingState}} {{formData.shippingZipCode}}</div>
+                          <div>{{formData.shippingCountry}}</div>
+                          <br>
+                        <span>Email:</span> <a href="{{formData.billingEmail}}">{{formData.billingEmail}}</a> <br>
+                        <span>Phone:</span> {{formData.shippingPhone}}
                       </address>
                     </div>
                     <div class="col-sm-6 col-xs-12">
-                      <div class="well">
-                        <h2><small>Order ID</small>{{data.dataValues.id}}</h2>
+                      <div class="well" style='color:black'>
+                        <h2><small style='color:black'>Order ID</small style='color:yellow'>{{databaseData.dataValues.id}}</h2>
                       </div>
                     </div>
                   </div>

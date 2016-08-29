@@ -191,7 +191,7 @@ app.post('/login', passport.authenticate('local', {
 	failureRedirect: '/login'
 }));
 
-app.post('/upload', function (req, res) {
+app.post('/confirm', function (req, res) {
 	console.log('i was posted to');
 	console.log(req.body);
 	// console.log(req.body.file);
@@ -200,9 +200,6 @@ app.post('/upload', function (req, res) {
 	// console.log(req.body.imgURL);
 	orm.addOrder(req.user.id, req.body, function (toHandlebars) {
 		res.render('checkout-complete', toHandlebars);
-
-		//this didn't work :(
-		// res.redirect('/order-confirm-page');
 	})
 });
 

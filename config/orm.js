@@ -39,8 +39,10 @@ module.exports = {
 		}).then(function (results) {
 			console.log(results);
 			var toHandlebars = {
-				data: results
+				formData: orderData,
+				databaseData: results
 			}
+			console.log(toHandlebars)
 			callback(toHandlebars);
 		});
 	},

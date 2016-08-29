@@ -52,10 +52,17 @@
                   </div>
                 </div>
                 
-                <form action="/upload" class="row" method="POST" role="form">
+                <form action="/confirm" class="row" method="POST" role="form">
                   <input type='hidden' name='imgURL' value={{orderInfo.imgURL}}>
                   <input type='hidden' name='color' value={{orderInfo.color}}>
                   <input type='hidden' name='shirtId' value={{orderInfo.shirtId}}>
+                  <input type='hidden' name='shippingAddress' value="{{billingShipping.shippingAddress}}">
+                  <input type='hidden' name='shippingCity' value="{{billingShipping.shippingCity}}">
+                  <input type='hidden' name='shippingState' value="{{billingShipping.shippingState}}">
+                  <input type='hidden' name='shippingZipCode' value="{{billingShipping.shippingZipCode}}">
+                  <input type='hidden' name='shippingCountry' value="{{billingShipping.shippingCountry}}">
+                  <input type='hidden' name='shippingPhone' value="{{billingShipping.billingPhone}}">
+                  <input type='hidden' name='billingEmail' value="{{billingShipping.billingEmail}}">
                   <div class="col-xs-12">
                     <div class="page-header">
                       <h4>order review</h4>
@@ -70,7 +77,7 @@
                         <address>
                           <strong>{{billingShipping.billingFirstName}} {{billingShipping.billingLastName}}</strong><br>
                           {{billingShipping.billingAddress}}<br>
-                          {{billingShipping.shippingCity}}<br>
+                          {{billingShipping.billingCity}}<br>
                           {{billingShipping.billingState}}, {{billingShipping.billingZipCode}}<br>
                           {{billingShipping.billingCountry}}
                         </address>
