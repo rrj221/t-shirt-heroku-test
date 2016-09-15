@@ -4,6 +4,8 @@
 
 <h4>Would you like to create a TShirt?</h4>
 
+<img id='editable-image' style='visibility: hidden; position: absolute; z-index: -50'/>
+
 <form action='/checkout-step-1' method='POST' class='form shirt-form'>
 {{!-- <form class='form'> --}}
 	<input type='hidden' class='imgURL' name='imgURL'>
@@ -23,7 +25,9 @@
   	</div>
   	<input type="file" id="input">
     <button type="submit" class="btn btn-success order">Order</button>
+    <button class='btn btn-danger adobe'>Edit Image</button>
 </form>
+
 
 
 

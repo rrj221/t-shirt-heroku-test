@@ -1,6 +1,21 @@
 $(document).ready(function () {
-	//this is very bad - I should have this on the server side. 
-	//I put it here because I was having some trouble getting it working that way
+
+	var originalImageSrc; // assigned when image file is dropped
+	var currentImage; // assigned when the Edit button is clicked
+
+
+	// Initialize Creative SDK
+	var csdkImageEditor = new Aviary.Feather({
+		apiKey: 'fc9e27dc7fe042308ba9581748b7a1b3',
+		onSave: function(imageID, editedImageURL) {
+			currentImage.src = editedImageURL;
+			downloadImage();
+			csdkImageEditor.close();
+		} 
+	});
+
+
+
 	// Initialize Firebase
 	var config = {
 		apiKey: "AIzaSyA_oyWpCsZ91yjI_YU9fVEu8Tjji17XBko",
@@ -11,6 +26,7 @@ $(document).ready(function () {
 	firebase.initializeApp(config);
 
 	$('.order').hide();
+	$('.adobe').hide();
 	var fileChosenRef;
 	var fileChosenURL;
 
@@ -33,8 +49,8 @@ $(document).ready(function () {
 		}).then(function () {
 		var img = $('<img>', {
 				src: url,
-				height: 64,
-				width: 64, 
+				height: 100,
+				width: 100, 
 				class: 'image'
 			});
 			img.appendTo($('#image'));
@@ -63,25 +79,16 @@ $(document).ready(function () {
   		var currentURL = window.location.origin;
   		console.log(currentURL);
 
-  // 		$.ajax({
-  //     		url : currentURL+'/upload',
-	 //        type : 'POST',
-	 //        data : formData,
-	 //        processData: false,  // tell jQuery not to process the data
-	 //        contentType: false,  // tell jQuery not to set contentType
-	 //        success : function(data) {
-	 //        	console.log(data);
-	 //            // alert(data);
-  //       	}
-		// });
 
-		// var fileJSON = {
-		// 	file: file
-		// }
+		//CREATIVE SDK////////
+		readURL(file);
+		setImage(file);
+		console.log('please show the button');
+		// validateFileType(file);
 
-		// var xhr = new XMLHttpRequest;
-		// xhr.open('POST', currentURL+'/upload', true);
-		// xhr.send(file);
+
+
+
 
 		var newImagesRef = imagesRef.child(file.name);
 		fileChosenRef = newImagesRef;
@@ -99,29 +106,6 @@ $(document).ready(function () {
   		});
 	}
 
-	// $('.order').on('click', function() {
-	// 	$(this).hide();
-	// 	var imgURL = $('.image').data('imgurl');
-	// 	var color = $('.tshirt').data('color');
-	// 	var shirtId = $('.color option:selected').data('id');
-	// 	console.log('LOOOOOOK');
-	// 	console.log(shirtId);
-	//  //    $.post('/upload', { 
-	// 	// 	imgURL: imgURL,
-	// 	// 	color: color, 
-	// 	// 	shirtId: shirtId 
-	// 	// });
-	//     $.post('/checkout-step-1', { 
-	// 		imgURL: imgURL,
-	// 		color: color, 
-	// 		shirtId: shirtId 
-	// 	});
-	// 	return false;
-	// })
-
-	// $('.form').on('submit', function () {
-	// 	return false;
-	// });
 
 	function getImageColor() {
 		return $('.color option:selected').data('color');
@@ -137,7 +121,15 @@ $(document).ready(function () {
 		$('.shirtId').val($('.color option:selected').data('id'));
 	});
 
+
+	$('.adobe').on('click', function () {
+		launchImageEditor();
+		return false
+	})
+
+
 	function shirtToPage() {
+		$('#image').empty();
 		var color = getImageColor();
 		console.log(color);
 		var shirtsImageRef = storageRef.child('shirts');
@@ -156,13 +148,14 @@ $(document).ready(function () {
 			fileChosenRef.getDownloadURL().then(function (url) {
 				var img = $('<img>', {
 					src: url,
-					height: 64,
-					width: 64, 
+					height: 100,
+					width: 100, 
 					class: 'image',
 					'data-imgurl': url
 				});
 				img.appendTo($('#image'));
 				$('.order').show();
+				$('.adobe').show();
 			});
 		});	
 	}
@@ -170,6 +163,71 @@ $(document).ready(function () {
 
 	function orderConfirm() {
 		$('h1').remove();
+	}
+
+
+
+	//creative
+	function validateFileType(file) {
+		console.log('hellow there');
+		setImage(file);
+			// toggleDragDrop();
+		launchImageEditor();
+		// if (fileIsSupported(file)) {
+		// 	setImage(file);
+		// 	// toggleDragDrop();
+		// 	launchImageEditor();
+		// 	return true;
+		// }
+		// else {
+		// 	alert('Try a JPEG or PNG image');
+		// 	return false;
+		// }
+	}
+	
+	function setImage(file) {
+		// imageElement.attr('src', window.URL.createObjectURL(file));
+		originalImageSrc = window.URL.createObjectURL(file);
+	}
+
+	function launchImageEditor() {
+
+		// if (!originalImageSrc) {
+		// 	alert('Drop an image in the drop area first.');
+		// 	return false;
+		// }
+
+		// Get the image to be edited
+		// `[0]` gets the image itself, not the jQuery object
+		currentImage = $('#editable-image')[0];
+
+		csdkImageEditor.launch({
+			image: currentImage.id,
+			//url: currentImage.src
+		});
+	}
+
+	function readURL(uploadedFile) {
+        var reader = new FileReader();
+
+        reader.onload = function (file) {
+            $('#editable-image').attr('src', file.target.result)
+        };
+
+        reader.readAsDataURL(uploadedFile);
+    }
+
+    function downloadImage() {
+		var url = currentImage ? currentImage.src : originalImageSrc;
+		var link = document.createElement("a");
+		
+		link.href = url;
+
+		// Download attr 
+		//// Only honored for links within same origin, 
+		//// therefore won't work once img has been edited (i.e., S3 URLs)
+		link.download = 'my-pic';
+		link.click();
 	}
 
 
