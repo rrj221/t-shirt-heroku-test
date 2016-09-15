@@ -49,8 +49,8 @@ $(document).ready(function () {
 		}).then(function () {
 		var img = $('<img>', {
 				src: url,
-				height: 100,
-				width: 100, 
+				height: 90,
+				width: 190, 
 				class: 'image'
 			});
 			img.appendTo($('#image'));
@@ -148,8 +148,8 @@ $(document).ready(function () {
 			fileChosenRef.getDownloadURL().then(function (url) {
 				var img = $('<img>', {
 					src: url,
-					height: 100,
-					width: 100, 
+					height: 90,
+					width: 90, 
 					class: 'image',
 					'data-imgurl': url
 				});
