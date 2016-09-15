@@ -50,7 +50,7 @@ $(document).ready(function () {
 		var img = $('<img>', {
 				src: url,
 				height: 90,
-				width: 190, 
+				width: 90, 
 				class: 'image'
 			});
 			img.appendTo($('#image'));
